@@ -40,9 +40,9 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.panelLateral = new System.Windows.Forms.Panel();
+            this.lblCancelarEdicion = new System.Windows.Forms.Label();
             this.comboSeccion = new System.Windows.Forms.ComboBox();
             this.lblSeccion = new System.Windows.Forms.Label();
-            this.PicCancelarEdicion = new System.Windows.Forms.PictureBox();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.lblContraseñaMarcacion = new System.Windows.Forms.Label();
@@ -57,7 +57,6 @@
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).BeginInit();
             this.panelLateral.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PicCancelarEdicion)).BeginInit();
             this.SuspendLayout();
             // 
             // gridEmpleados
@@ -107,9 +106,6 @@
             this.txtBuscar.Size = new System.Drawing.Size(1019, 26);
             this.txtBuscar.TabIndex = 13;
             this.txtBuscar.Text = "Buscar...";
-            this.txtBuscar.TextChanged += new System.EventHandler(this.TxtBuscar_TextChanged);
-            this.txtBuscar.Enter += new System.EventHandler(this.TxtBuscar_Enter);
-            this.txtBuscar.Leave += new System.EventHandler(this.TxtBuscar_Leave);
             // 
             // panelTop
             // 
@@ -147,7 +143,6 @@
             this.picCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picCerrar.TabIndex = 12;
             this.picCerrar.TabStop = false;
-            this.picCerrar.Click += new System.EventHandler(this.PicCerrar_Click);
             // 
             // btnAgregar
             // 
@@ -205,14 +200,13 @@
             this.btnModificar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.BtnModificar_Click);
             // 
             // panelLateral
             // 
             this.panelLateral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(70)))), ((int)(((byte)(127)))));
+            this.panelLateral.Controls.Add(this.lblCancelarEdicion);
             this.panelLateral.Controls.Add(this.comboSeccion);
             this.panelLateral.Controls.Add(this.lblSeccion);
-            this.panelLateral.Controls.Add(this.PicCancelarEdicion);
             this.panelLateral.Controls.Add(this.btnGuardar);
             this.panelLateral.Controls.Add(this.label4);
             this.panelLateral.Controls.Add(this.lblContraseñaMarcacion);
@@ -224,11 +218,22 @@
             this.panelLateral.Controls.Add(this.lblLegajo);
             this.panelLateral.Controls.Add(this.txtLegajo);
             this.panelLateral.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelLateral.Enabled = false;
             this.panelLateral.Location = new System.Drawing.Point(1037, 50);
             this.panelLateral.Name = "panelLateral";
             this.panelLateral.Size = new System.Drawing.Size(263, 526);
             this.panelLateral.TabIndex = 16;
+            // 
+            // lblCancelarEdicion
+            // 
+            this.lblCancelarEdicion.AutoSize = true;
+            this.lblCancelarEdicion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblCancelarEdicion.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCancelarEdicion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(38)))), ((int)(((byte)(0)))));
+            this.lblCancelarEdicion.Location = new System.Drawing.Point(109, 430);
+            this.lblCancelarEdicion.Name = "lblCancelarEdicion";
+            this.lblCancelarEdicion.Size = new System.Drawing.Size(74, 19);
+            this.lblCancelarEdicion.TabIndex = 15;
+            this.lblCancelarEdicion.Text = "Cancelar";
             // 
             // comboSeccion
             // 
@@ -249,19 +254,6 @@
             this.lblSeccion.Size = new System.Drawing.Size(75, 21);
             this.lblSeccion.TabIndex = 13;
             this.lblSeccion.Text = "Seccion:";
-            // 
-            // PicCancelarEdicion
-            // 
-            this.PicCancelarEdicion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.PicCancelarEdicion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(38)))), ((int)(((byte)(0)))));
-            this.PicCancelarEdicion.Image = ((System.Drawing.Image)(resources.GetObject("PicCancelarEdicion.Image")));
-            this.PicCancelarEdicion.Location = new System.Drawing.Point(241, 6);
-            this.PicCancelarEdicion.Name = "PicCancelarEdicion";
-            this.PicCancelarEdicion.Size = new System.Drawing.Size(15, 16);
-            this.PicCancelarEdicion.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PicCancelarEdicion.TabIndex = 4;
-            this.PicCancelarEdicion.TabStop = false;
-            this.PicCancelarEdicion.Click += new System.EventHandler(this.PicCancelarEdicion_Click);
             // 
             // btnGuardar
             // 
@@ -383,42 +375,39 @@
             this.Name = "EmpleadosFrm";
             this.Tag = "algo";
             this.Text = "EmpleadosFrm";
-            this.Load += new System.EventHandler(this.EmpleadoForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridEmpleados)).EndInit();
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).EndInit();
             this.panelLateral.ResumeLayout(false);
             this.panelLateral.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PicCancelarEdicion)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView gridEmpleados;
-        private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.Panel panelTop;
-        private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.Button btnEliminar;
-        private System.Windows.Forms.Button btnModificar;
-        private System.Windows.Forms.PictureBox picCerrar;
-        private System.Windows.Forms.Panel panelLateral;
-        private System.Windows.Forms.PictureBox PicCancelarEdicion;
-        private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblContraseñaMarcacion;
-        private System.Windows.Forms.TextBox txtContraseñaMarcacion;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtTarjetaRFID;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label lblLegajo;
-        private System.Windows.Forms.TextBox txtLegajo;
         private System.Windows.Forms.Label lblSeccion;
-        private System.Windows.Forms.ComboBox comboSeccion;
         private System.Windows.Forms.Label label6;
+        public System.Windows.Forms.Panel panelLateral;
+        public System.Windows.Forms.DataGridView gridEmpleados;
+        public System.Windows.Forms.TextBox txtBuscar;
+        public System.Windows.Forms.Button btnAgregar;
+        public System.Windows.Forms.Button btnEliminar;
+        public System.Windows.Forms.Button btnModificar;
+        public System.Windows.Forms.PictureBox picCerrar;
+        public System.Windows.Forms.Button btnGuardar;
+        public System.Windows.Forms.TextBox txtContraseñaMarcacion;
+        public System.Windows.Forms.TextBox txtTarjetaRFID;
+        public System.Windows.Forms.TextBox txtNombre;
+        public System.Windows.Forms.TextBox txtLegajo;
+        public System.Windows.Forms.ComboBox comboSeccion;
+        public System.Windows.Forms.Label lblCancelarEdicion;
     }
 }

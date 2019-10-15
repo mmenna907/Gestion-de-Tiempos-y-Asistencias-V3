@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationController\Animacion.cs" />
     <Compile Include="ApplicationController\DispositivosController.cs" />
     <Compile Include="ApplicationController\EmpleadoController.cs" />
     <Compile Include="ApplicationController\LoginController.cs" />
@@ -80,6 +81,12 @@
     </Compile>
     <Compile Include="Forms\EmpleadosFrm.Designer.cs">
       <DependentUpon>EmpleadosFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\BienvenidoFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BienvenidoFrm.Designer.cs">
+      <DependentUpon>BienvenidoFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\LoginFrm.cs">
       <SubType>Form</SubType>
@@ -101,6 +108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EmpleadosFrm.resx">
       <DependentUpon>EmpleadosFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BienvenidoFrm.resx">
+      <DependentUpon>BienvenidoFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginFrm.resx">
       <DependentUpon>LoginFrm.cs</DependentUpon>
@@ -163,6 +173,11 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CircularProgressBar">
+      <Version>2.7.0.7</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

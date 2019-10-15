@@ -18,11 +18,19 @@ namespace UI.Desktop
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            LoginFrm _LoginFrm = new LoginFrm();
+            LoginFrm _LoginFrm = new LoginFrm();            
             _LoginFrm.ShowDialog();
 
             if (_LoginFrm.DialogResult == DialogResult.OK)
-                Application.Run(new PrincipalFrm());
+            {
+                BienvenidoFrm bienvenido = new BienvenidoFrm();
+                bienvenido.ShowDialog();
+                if (bienvenido.DialogResult == DialogResult.OK)
+                {
+                    Application.Run(new PrincipalFrm());
+                }
+            }
+                
         }
     }
 }

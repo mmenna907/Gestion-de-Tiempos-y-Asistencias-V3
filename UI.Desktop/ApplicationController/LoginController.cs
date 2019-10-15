@@ -7,10 +7,11 @@ using UI.Desktop.Forms;
 using Aplication;
 using System.Windows.Forms;
 using System.Drawing;
+using System.ComponentModel;
+using System.Threading;
 
 namespace UI.Desktop.ApplicationController
-{
-    
+{    
     public class LoginController
     {
         LoginFrm loginFrm;
@@ -19,45 +20,60 @@ namespace UI.Desktop.ApplicationController
             loginFrm = pLoginFrm;
             loginFrm.Load += new EventHandler(SetearValoresIniciales);
             //btnLogin
-            loginFrm.btnLogin.Click += new EventHandler(btnLogin_Click);
-            loginFrm.btnLogin.Enter += new EventHandler(btnLogin_Enter);
-            loginFrm.btnLogin.Leave += new EventHandler(btnLogin_Leave);
+            loginFrm.btnLogin.Click += new EventHandler(BtnLogin_Click);
+            loginFrm.btnLogin.Enter += new EventHandler(BtnLogin_Enter);
+            loginFrm.btnLogin.Leave += new EventHandler(BtnLogin_Leave);
             //TxtUsuario
-            loginFrm.txtUsuario.Enter += new EventHandler(txtUsuario_Enter);
-            loginFrm.txtUsuario.Leave += new EventHandler(txtUsuario_Leave);
-            loginFrm.txtUsuario.KeyPress += new KeyPressEventHandler(txtUsuario_KeyPress);
+            loginFrm.txtUsuario.Enter += new EventHandler(TxtUsuario_Enter);
+            loginFrm.txtUsuario.Leave += new EventHandler(TxtUsuario_Leave);
+            loginFrm.txtUsuario.KeyPress += new KeyPressEventHandler(TxtUsuario_KeyPress);
             //txtContraseña
-            loginFrm.txtContraseña.Enter += new EventHandler(txtContraseña_Enter);
-            loginFrm.txtContraseña.Leave += new EventHandler(txtContraseña_Leave);
-            loginFrm.txtContraseña.KeyPress += new KeyPressEventHandler(txtContraseña_KeyPress);
+            loginFrm.txtContraseña.Enter += new EventHandler(TxtContraseña_Enter);
+            loginFrm.txtContraseña.Leave += new EventHandler(TxtContraseña_Leave);
+            loginFrm.txtContraseña.KeyPress += new KeyPressEventHandler(TxtContraseña_KeyPress);
             //btnCerrar
-            loginFrm.btnCerrar.Click += new EventHandler(btnCerrar_Click);
+            loginFrm.btnCerrar.Click += new EventHandler(BtnCerrar_Click);
             //btnMinimizar
-            loginFrm.btnMinimizar.Click += new EventHandler(btnMinimizar_Click);
+            loginFrm.btnMinimizar.Click += new EventHandler(BtnMinimizar_Click);
+            //Mostrar Conexion con servidor de Autenticacion
+            MostrarMensaje("Intentando establecer conexion", loginFrm.lblConexionConServidorDeAutenticacion);
+            loginFrm.backgroundWorker1.DoWork += new DoWorkEventHandler(BackgroundWorker1_DoWork);
+            loginFrm.backgroundWorker1.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BackgroundWorker1_RunWorkerCompleted);
+            loginFrm.backgroundWorker1.RunWorkerAsync();      
+        }
+        
+        private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        { //Ejecuta en segundo plano una conexion con el servidor de inicio de sesion.                   
+            e.Result = new LogingService().ComprobarConexion();
+        }
+        
+        private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {//recibe el resultado cuando finaliza el metodo DoWork
+            MostrarMensaje(e.Result.ToString(), loginFrm.lblConexionConServidorDeAutenticacion);
         }
 
         private void SetearValoresIniciales(object sender, EventArgs e)
         {
             loginFrm.lblAccesoDenegado.Visible = false;
         }
-        public void btnLogin_Click(object sender, EventArgs e)
+        public void BtnLogin_Click(object sender, EventArgs e)
         {
             if (loginFrm.txtUsuario.Text == "USUARIO" || loginFrm.txtUsuario.Text == "")
-                MostrarMensaje("Ingrese un nombre de Usuario porfavor");
+                MostrarMensaje("Ingrese un nombre de Usuario porfavor", loginFrm.lblAccesoDenegado);
             else if (loginFrm.txtContraseña.Text == "CONTRASEÑA" || loginFrm.txtContraseña.Text == "")
-                MostrarMensaje("Ingrese una contraseña porfavor");
+                MostrarMensaje("Ingrese una contraseña porfavor", loginFrm.lblAccesoDenegado);
             else
                 Acceder();
         }
-        private void btnLogin_Enter(object sender, EventArgs e)
+        private void BtnLogin_Enter(object sender, EventArgs e)
         {
             loginFrm.btnLogin.BackColor = Color.FromArgb(64, 64, 64);
         }
-        private void btnLogin_Leave(object sender, EventArgs e)
+        private void BtnLogin_Leave(object sender, EventArgs e)
         {
             loginFrm.btnLogin.BackColor = Color.FromArgb(120, 120, 120);
         }
-        private void txtUsuario_Enter(object sender, EventArgs e)
+        private void TxtUsuario_Enter(object sender, EventArgs e)
         {
             if (loginFrm.txtUsuario.Text == "USUARIO")
             {                
@@ -65,7 +81,7 @@ namespace UI.Desktop.ApplicationController
                 loginFrm.txtUsuario.ForeColor = Color.White;
             }
         }
-        private void txtUsuario_Leave(object sender, EventArgs e)
+        private void TxtUsuario_Leave(object sender, EventArgs e)
         {
             if (loginFrm.txtUsuario.Text == "")
             {
@@ -73,12 +89,12 @@ namespace UI.Desktop.ApplicationController
                 loginFrm.txtUsuario.ForeColor = Color.Silver;
             }
         }
-        private void txtUsuario_KeyPress(object sender, KeyPressEventArgs e)
+        private void TxtUsuario_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((int)e.KeyChar == (int)Keys.Enter)
                 loginFrm.txtContraseña.Focus();
         }
-        private void txtContraseña_Enter(object sender, EventArgs e)
+        private void TxtContraseña_Enter(object sender, EventArgs e)
         {
             if (loginFrm.txtContraseña.Text == "CONTRASEÑA")
             {
@@ -87,7 +103,7 @@ namespace UI.Desktop.ApplicationController
                 loginFrm.txtContraseña.UseSystemPasswordChar = true;
             }
         }
-        private void txtContraseña_Leave(object sender, EventArgs e)
+        private void TxtContraseña_Leave(object sender, EventArgs e)
         {
             if (loginFrm.txtContraseña.Text == "")
             {
@@ -96,12 +112,12 @@ namespace UI.Desktop.ApplicationController
                 loginFrm.txtContraseña.UseSystemPasswordChar = false;
             }
         }
-        private void txtContraseña_KeyPress(object sender, KeyPressEventArgs e)
+        private void TxtContraseña_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((int)e.KeyChar == (int)Keys.Enter)
             {
                 loginFrm.btnLogin.BackColor = Color.FromArgb(64, 64, 64);
-                btnLogin_Click(sender, e);//ejecuto el boton click
+                BtnLogin_Click(sender, e);//ejecuto el boton click
             }
         }
         private void Acceder()
@@ -113,34 +129,34 @@ namespace UI.Desktop.ApplicationController
             if(valido)
             {
                 var resultado = SesionService.Instancia.IniciarSesion(NombreUsuario);
-                if(resultado=="")
-                    loginFrm.DialogResult = DialogResult.OK;//ejecuto el formulario principal                
+                if (resultado == "")
+                    loginFrm.DialogResult = DialogResult.OK;
                 else
-                    MostrarMensaje(resultado);                
+                    MostrarMensaje(resultado, loginFrm.lblAccesoDenegado);            
             }
             else
-                MostrarMensaje("Acceso Denegado");
+                MostrarMensaje("Acceso Denegado", loginFrm.lblAccesoDenegado);
         }
-        private void MostrarMensaje(string pMensaje)
+        private void MostrarMensaje(string pMensaje, Label pLabel)
         {
-            loginFrm.lblAccesoDenegado.Text = pMensaje;
-            loginFrm.lblAccesoDenegado.Visible = true;
+            pLabel.Text = pMensaje;
+            pLabel.Visible = true;
             // PARA MOSTRAR EL MENSAJE CENTRADO
             // Obtengo el area actual
             Rectangle areaClienteFormulario = loginFrm.ClientRectangle;
             // Calculo el punto intermedio del área cliente.
             int puntoIntermedio = (areaClienteFormulario.Width / 2);
             // Calculo los nuevos puntos.
-            int puntoX = (puntoIntermedio - (loginFrm.lblAccesoDenegado.Width / 2) + (loginFrm.panelLogo.Width / 2));//punto medio menos el ancho del texto a mostrar mas el ancho del panle logo
-            int puntoY = loginFrm.lblAccesoDenegado.Location.Y;
+            int puntoX = (puntoIntermedio - (pLabel.Width / 2) + (loginFrm.panelLogo.Width / 2));//punto medio menos el ancho del texto a mostrar mas el ancho del panle logo
+            int puntoY = pLabel.Location.Y;
             // Establecemos la nueva posición del control.
-            loginFrm.lblAccesoDenegado.Location = new Point(puntoX, puntoY);
+            pLabel.Location = new Point(puntoX, puntoY);
         }
-        private void btnCerrar_Click(object sender, EventArgs e)
+        private void BtnCerrar_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
-        private void btnMinimizar_Click(object sender, EventArgs e)
+        private void BtnMinimizar_Click(object sender, EventArgs e)
         {
             loginFrm.WindowState = FormWindowState.Minimized;
         }

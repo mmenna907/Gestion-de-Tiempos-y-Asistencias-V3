@@ -41,6 +41,8 @@
             this.btnMinimizar = new System.Windows.Forms.PictureBox();
             this.btnCerrar = new System.Windows.Forms.PictureBox();
             this.btnLogin = new System.Windows.Forms.Button();
+            this.lblConexionConServidorDeAutenticacion = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMinimizar)).BeginInit();
@@ -194,12 +196,27 @@
             this.btnLogin.Text = "ACCEDER";
             this.btnLogin.UseVisualStyleBackColor = false;
             // 
+            // lblConexionConServidorDeAutenticacion
+            // 
+            this.lblConexionConServidorDeAutenticacion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblConexionConServidorDeAutenticacion.AutoSize = true;
+            this.lblConexionConServidorDeAutenticacion.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConexionConServidorDeAutenticacion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(38)))), ((int)(((byte)(0)))));
+            this.lblConexionConServidorDeAutenticacion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblConexionConServidorDeAutenticacion.Location = new System.Drawing.Point(586, 304);
+            this.lblConexionConServidorDeAutenticacion.Name = "lblConexionConServidorDeAutenticacion";
+            this.lblConexionConServidorDeAutenticacion.Size = new System.Drawing.Size(182, 17);
+            this.lblConexionConServidorDeAutenticacion.TabIndex = 17;
+            this.lblConexionConServidorDeAutenticacion.Text = "Servidor de Autenticacion";
+            this.lblConexionConServidorDeAutenticacion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // LoginFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(93)))), ((int)(((byte)(92)))));
             this.ClientSize = new System.Drawing.Size(780, 330);
+            this.Controls.Add(this.lblConexionConServidorDeAutenticacion);
             this.Controls.Add(this.btnMinimizar);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.lblTitulo);
@@ -237,5 +254,7 @@
         public System.Windows.Forms.PictureBox btnCerrar;
         public System.Windows.Forms.PictureBox btnMinimizar;
         public System.Windows.Forms.Panel panelLogo;
+        public System.Windows.Forms.Label lblConexionConServidorDeAutenticacion;
+        public System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

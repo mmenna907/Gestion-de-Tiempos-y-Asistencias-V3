@@ -7,12 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//libreria agregada para desarrollar la funcionalidad de arrastar el formulario.
 using System.Runtime.InteropServices;
-using Infra.CrossCutting;
 using UI.Desktop.ApplicationController;
-
-
+using System.Threading;
 
 namespace UI.Desktop.Forms
 {
@@ -28,12 +25,12 @@ namespace UI.Desktop.Forms
         {
             InitializeComponent();
             loginController = new LoginController(this);
-
         }
         private void LoginFrm_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
-        }
+        }       
+       
     }//fin de clase
 }
